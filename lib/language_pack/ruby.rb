@@ -88,6 +88,7 @@ class LanguagePack::Ruby < LanguagePack::Base
         build_bundler
         post_bundler
         create_database_yml
+        install_binaries
       end
       super
     end
@@ -763,7 +764,7 @@ params = CGI.parse(uri.query || "")
   # @note execjs will blow up if no JS RUNTIME is detected and is loaded.
   # @return [Array] the node.js binary path if we need it or an empty Array
   def add_node_js_binary
-    bundler.has_gem?('execjs') && node_not_preinstalled? ? [@node_installer.binary_path] : []
+    node_not_preinstalled? ? [@node_installer.binary_path] : []
   end
 
   # checks if node.js is installed via the official heroku-buildpack-nodejs using multibuildpack
