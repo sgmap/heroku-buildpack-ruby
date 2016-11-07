@@ -75,15 +75,6 @@ class LanguagePack::Ruby < LanguagePack::Base
     end
   end
 
-  def best_practice_warnings
-    if bundler.has_gem?("asset_sync")
-      warn(<<-WARNING)
-You are using the `asset_sync` gem.
-See https://devcenter.heroku.com/articles/please-do-not-use-asset-sync for more information.
-WARNING
-    end
-  end
-
   def compile
     instrument 'ruby.compile' do
       # check for new app at the beginning of the compile
@@ -101,7 +92,6 @@ WARNING
         post_bundler
         create_database_yml
       end
-      best_practice_warnings
       super
     end
   end
