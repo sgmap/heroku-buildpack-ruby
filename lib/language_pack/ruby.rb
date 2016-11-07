@@ -574,7 +574,7 @@ https://devcenter.heroku.com/articles/bundler-windows-gemfile
 WARNING
 
           log("bundle", "has_windows_gemfile_lock")
-          File.unlink("Gemfile.lock")
+          File.unlink("Gemfile.lock") if File.exist?("Gemfile.lock")
         else
           # using --deployment is preferred if we can
           bundle_command += " --deployment"
